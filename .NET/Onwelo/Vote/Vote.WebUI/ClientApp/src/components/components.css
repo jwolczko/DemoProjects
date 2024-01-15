@@ -1,0 +1,56 @@
+﻿body {
+}
+
+div{
+        
+}
+
+div.component {
+    display: inline-grid;
+    width: 50%;
+    padding:20px 10px 10px 40px
+}
+
+div.component2 {
+    display: inline-grid;
+    width: 100%;
+    padding: 20px 10px 10px 40px
+}
+
+button.header{
+    align-self:stretch
+}
+
+td.vote_table_choise{
+    width:400px
+}
+td.vote_table_submit {
+    width: 100px;
+    text-align: right;
+}
+
+td.content_buttons {
+    text-align:right;
+}
+
+th.button_header {
+}
+
+table.vote_table{
+
+}
+
+tr.vote_table_submit{
+
+}
+
+td.label_content {
+    width: 200px;
+}
+
+td.input_content {
+    align-content:space-between;  
+    text-align:right;
+}
+
+
