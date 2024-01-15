@@ -1,0 +1,96 @@
+Examples for Event processor coding exercise
+Example 1
+Input:
+Identifier,Event ts (seconds),Payload,Checksum 
+
+4,456,Box,7 
+
+5,466,AAA,1  
+
+6,506,xyz,3 
+
+Output:
+Event 4: 3, max 3, window ends 456
+
+Event 5: Invalid checksum
+
+… rest of the output follows ...
+
+Example 2
+Input:
+Identifier,Event ts (seconds),Payload,Checksum 
+
+10,456,abcd,4  
+
+11,466,abcde,5  
+
+12,506,abcdef,7 
+
+13,520,a,7 
+
+14,570,abcde,5 
+
+Output:
+Event 10: average 4, max 4, window ends 456 
+
+Event 11: average 4.5, max 5, window ends 466 
+
+Event 12: average 5, max 6, window ends 506 
+
+Event 13: average 4, max 6, window ends 520 
+
+Event 14: average 3, max 5, window ends 570 
+
+Example 3
+Input:
+Identifier,Event ts (seconds),Payload,Checksum 
+
+21,450,abcd,4  
+
+22,460,abcde,5  
+
+23,530,abcdef,7 
+
+24,460,a,7 
+
+25,570,abcd,4
+
+Output:
+Event 21: average 4, max 4, window ends 450 
+
+Event 22: average 4.5, max 5, window ends 460 
+
+Event 23: average 6, max 6, window ends 530 
+
+Event 24: Ignored, too late received, window starts 470  
+
+Event 25: average 5, max 6, window ends 570 
+
+Example 4
+Input:
+Identifier,Event ts (seconds),Payload,Checksum 
+
+31,10,abcd,4 
+
+32,50,abcde,5 
+
+33,30,ab,5 
+
+34,20,abcdef,7 
+
+35,90,ab,5 
+
+36,120,a,7 
+
+Output:
+Event 31: average 4.00, max 4, window ends 10 
+
+Event 32: average 4.50, max 5, window ends 50 
+
+Event 33: average 3.67, max 5, window ends 50 
+
+Event 34: average 4.25, max 6, window ends 50 
+
+Event 35: average 3.00, max 5, window ends 90 
+
+Event 36: average 1.50, max 2, window ends 120 

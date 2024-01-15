@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "SimulatorEventStream": {
+      "commandName": "Project",
+      "commandLineArgs": "D:\\Desktop\\events.csv"
+    }
+  }
+}
