@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <InvariantGlobalization>true</InvariantGlobalization>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.2.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Tracker.ApplicationCore.Commands\Tracker.ApplicationCore.Commands.csproj" />
+    <ProjectReference Include="..\Tracker.ApplicationCore.Queries\Tracker.ApplicationCore.Queries.csproj" />
+    <ProjectReference Include="..\Tracker.Repository\Tracker.Repository.csproj" />
+  </ItemGroup>
+
+</Project>
