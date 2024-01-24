@@ -12,8 +12,8 @@ public class GetTrucksQueryHandler : IRequestHandler<GetTrucksQuery, IEnumerable
         _repository = repository;
     }
 
-    public async Task<IEnumerable<Truck>> Handle(GetTrucksQuery request, CancellationToken cancellationToken)
+    public Task<IEnumerable<Truck>> Handle(GetTrucksQuery request, CancellationToken cancellationToken)
     {
-        return await _repository.GetTrucks();
+        return _repository.GetTrucksAsync();
     }
 }
