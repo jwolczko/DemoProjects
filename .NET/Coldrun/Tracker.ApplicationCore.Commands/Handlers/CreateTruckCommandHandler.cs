@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Tracker.Domain;
 using Tracker.Repository;
 
 namespace Tracker.ApplicationCore.Commands.Handlers
@@ -14,7 +15,15 @@ namespace Tracker.ApplicationCore.Commands.Handlers
 
         public Task<string> Handle(CreateTruckCommand request, CancellationToken cancellationToken)
         {
-            return _repository.CreateTruckAsync(request.Truck);
+            Truck newTruck = new()
+            {
+                Code = request.Truck.Code,
+                Name = request.Truck.Name,
+                Description = request.Truck.Description,
+                Status = TrackStatus.OutOfService
+            };
+
+            return _repository.CreateTruckAsync(newTruck);
         }
     }
 }

@@ -1,11 +1,11 @@
 ﻿using MediatR;
-using Tracker.Domain;
+using Tracker.Domain.ValueObjects;
 
 namespace Tracker.ApplicationCore.Commands
 {
     public class UpdateTruckCommand : IRequest
     {
         public string Code { get; set; }
-        public Truck Truck { get; set; }
+        public UpdateTruck Truck { get; set; }
     }
 }

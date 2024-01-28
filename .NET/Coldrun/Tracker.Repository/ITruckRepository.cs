@@ -1,12 +1,12 @@
 ﻿using Tracker.Domain;
 
-namespace Tracker.Repository
+namespace Tracker.Repository;
+
+public interface ITruckRepository
 {
-    public interface ITruckRepository
-    {
-        Task<IEnumerable<Truck>> GetTrucksAsync();
-        Task<string> CreateTruckAsync(Truck truck);
-        Task UpdateTruckAsync(Truck truck); 
-        Task DeleteTruckAsync(string code);
-    }
+    Task<Truck> GetTruck(string code);
+    Task<IEnumerable<Truck>> GetTrucksAsync();
+    Task<string> CreateTruckAsync(Truck truck);
+    Task UpdateTruckAsync(Truck truck); 
+    Task DeleteTruckAsync(string code);
 }

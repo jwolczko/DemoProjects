@@ -1,50 +1,49 @@
 ﻿using Tracker.Domain;
 
-namespace Tracker.Repository
+namespace Tracker.Repository;
+
+public class InMemoryTruckRepository : ITruckRepository
 {
-    public class InMemoryTruckRepository : ITruckRepository
+    private static readonly Dictionary<string, Truck> _trucks = new();
+    
+    public InMemoryTruckRepository()
     {
-        private static List<Truck> trucks = 
-        [
-            new Truck { Code = "ABC69", Description = "Truck 1", Name = "Track 1", Status = TrackStatus.OutOfService },
-            new Truck { Code = "ABC70", Description = "Truck 2", Name = "Track 2", Status = TrackStatus.Loading }
-        ];
+        _trucks["ABC69"] = new Truck { Code = "ABC69", Description = "Truck 1", Name = "Track 1", Status = TrackStatus.OutOfService };
+        _trucks["ABC70"] = new Truck { Code = "ABC70", Description = "Truck 2", Name = "Track 2", Status = TrackStatus.Loading };
+    }
 
-        public Task<IEnumerable<Truck>> GetTrucksAsync()
+    public Task<IEnumerable<Truck>> GetTrucksAsync()
+    {
+        return Task.FromResult(_trucks.Values.AsEnumerable());
+    }
+
+    public Task<Truck> GetTruck(string code)
+    {
+        if (string.IsNullOrEmpty(code))
+            return null;
+
+        if(_trucks.TryGetValue(code, out Truck truck))
         {
-            return Task.FromResult(trucks.AsEnumerable());
+            return Task.FromResult(truck);
         }
+        return null;
+    }
 
-        public Task<string> CreateTruckAsync(Truck truck)
-        {
-            trucks.Add(truck);
-            return Task.FromResult(truck.Code);
-        }
+    public Task<string> CreateTruckAsync(Truck truck)
+    {
+        _trucks[truck.Code] = truck;
+        return Task.FromResult(truck.Code);
+    }
 
+    public Task UpdateTruckAsync(Truck truck)
+    {
+        _trucks[truck.Code] = truck;
+        return Task.CompletedTask;
+    }
 
-        public Task UpdateTruckAsync(Truck truck)
-        {
-            var trackToUpdate = trucks.FirstOrDefault(t =>  t.Code == truck.Code);
-
-            if (trackToUpdate != null)
-            {
-                trackToUpdate.Status = truck.Status;
-                trackToUpdate.Name = truck.Name;
-                trackToUpdate.Description = truck.Description;  
-            }
-            return Task.CompletedTask;
-        }
-
-        public Task DeleteTruckAsync(string code)
-        {
-            Truck trackToDelete = trucks.FirstOrDefault(t => t.Code == code);
-            
-            if(trackToDelete != null)
-            {
-                trucks.Remove(trackToDelete);
-            }
-
-            return Task.CompletedTask;
-        }
+    public Task DeleteTruckAsync(string code)
+    {
+        _trucks.Remove(code);
+        return Task.CompletedTask;
     }
 }
