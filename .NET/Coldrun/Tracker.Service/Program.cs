@@ -1,4 +1,4 @@
-using FluentValidation.AspNetCore;
+using FluentValidation;
 using System.Reflection;
 using Tracker.ApplicationCore.Commands;
 using Tracker.ApplicationCore.Queries;
@@ -7,7 +7,8 @@ using Tracker.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers().AddFluentValidation(fv => fv.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()));
+builder.Services.AddControllers();
+builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

@@ -5,32 +5,31 @@ using Tracker.Repository;
 
 namespace Tracker.ApplicationCore.Commands.Handlers
 {
-    public class UpdateTruckCommandHandler : IRequestHandler<UpdateTruckCommand>
+    public class UpdateTruckCommandHandler : BaseTruckRepositoryCommandHandler,
+        IRequestHandler<UpdateTruckCommand>
     {
-        private readonly ITruckRepository _repository;
-        private readonly ITruckState _truckState;
-
-        public UpdateTruckCommandHandler(ITruckState truckState, ITruckRepository repository)
+        public UpdateTruckCommandHandler(ITruckRepository repository) : base(repository)
         {
-            _truckState = truckState;
-            _repository = repository;
         }
 
-        public async Task Handle(UpdateTruckCommand request, CancellationToken cancellationToken)
+        public Task Handle(UpdateTruckCommand request, CancellationToken cancellationToken)
         {
-            Truck truckToUpdate = await _repository.GetTruck(request.Code);
-            if (truckToUpdate == null)
-            {
-                if(request.Truck.Status.HasValue)
-                    truckToUpdate.Status = request.Truck.Status.Value;
+            return _repository.GetTruck(request.Code)
+                .ContinueWith((task) =>
+                {
+                    if (task != null && task.Result != null)
+                    {
+                        if (request.Truck.Status.HasValue)
+                            task.Result.Status = request.Truck.Status.Value;
 
-                if(!string.IsNullOrEmpty(request.Truck.Name))
-                    truckToUpdate.Name = request.Truck.Name;
-                
-                truckToUpdate.Description = request.Truck.Description;
+                        if (!string.IsNullOrEmpty(request.Truck.Name))
+                            task.Result.Name = request.Truck.Name;
 
-            }
-            _ = _repository.UpdateTruckAsync(truckToUpdate);
+                        task.Result.Description = request.Truck.Description;
+                    }
+                    return task.Result;
+
+                }).ContinueWith(UpdateTruck);
         }
     }
 }
