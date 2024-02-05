@@ -1,10 +1,10 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatsCounter", "StatsCounter\StatsCounter.csproj", "{EF7074CA-056C-499A-9AA9-07569D17DC27}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StatsCounter", "StatsCounter\StatsCounter.csproj", "{EF7074CA-056C-499A-9AA9-07569D17DC27}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatsCounter.Tests.Unit", "StatsCounter.Tests.Unit\StatsCounter.Tests.Unit.csproj", "{2F0EF91B-F8E3-4030-86EA-0FDF0DF8F3AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StatsCounter.Tests.Unit", "StatsCounter.Tests.Unit\StatsCounter.Tests.Unit.csproj", "{2F0EF91B-F8E3-4030-86EA-0FDF0DF8F3AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatsCounter.Tests.Integration", "StatsCounter.Tests.Integration\StatsCounter.Tests.Integration.csproj", "{F0E86A50-0E35-42A9-B8D2-5AB4D32D1B1C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StatsCounter.Tests.Integration", "StatsCounter.Tests.Integration\StatsCounter.Tests.Integration.csproj", "{F0E86A50-0E35-42A9-B8D2-5AB4D32D1B1C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

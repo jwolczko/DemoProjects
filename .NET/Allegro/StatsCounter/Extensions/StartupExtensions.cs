@@ -10,7 +10,6 @@ namespace StatsCounter.Extensions
             this IServiceCollection services,
             Uri baseApiUrl)
         {
-            services.AddScoped<IGitHubService, GitHubService>();
             services.AddHttpClient<IGitHubService, GitHubService>(client =>
             {
                 client.BaseAddress = baseApiUrl;
